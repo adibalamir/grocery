@@ -17,11 +17,11 @@ function App() {
     <div className="App">
       <header className="App-header">
         <h1>Shopping List</h1>
-        
       </header>
+
       <input name="new-grocery-item" placeholder="Add a new item." value={input} onChange={(e) => setInput(e.target.value)} />
       <button className="submit-grocery-item" onClick={() => addGroceryItem([...groceryList, input])}>Submit</button>
-        <GroceryList list={groceryList} />
+      <GroceryList list={groceryList} />
     </div>
   );
 }
