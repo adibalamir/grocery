@@ -1,5 +1,5 @@
 import './App.css';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 function GroceryList(props) {
   return <ul className="grocery-list">
@@ -12,6 +12,13 @@ function GroceryList(props) {
 function App() {
   const [groceryList, addGroceryItem] = useState([])
   const [input, setInput] = useState("");
+
+  useEffect(() => {
+    fetch(`https://localhost:9000/testAPI`)
+      .then(res => {
+        console.log(res);
+      })
+  })
 
   return (
     <div className="App">
