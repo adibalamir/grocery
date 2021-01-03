@@ -7,13 +7,17 @@ This app is to keep track of groceries I need, and it will be accessible on any 
 
 ### 2) Install dependancies
 cd to frontend directory inside the project and run
-` yarn install `
+```
+yarn install
+```
 cd into backend directory and run
-` yarn install `
+```
+yarn install
+```
 
 ### 3) run the project
-start the backend by going to backend and running
-` yarn start `
-start frontend by going to frontend directory and running
-` yarn start ` 
+Go to root directory and run
+```
+yarn run dev
+```
 
