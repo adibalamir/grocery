@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 function GroceryList(props) {
   return <ul className="grocery-list row">
     {props.list.length > 0 ? props.list.map(item => {
-      return <li className="grocery-item" key={item.length}>{item}</li>
+      return <li className="grocery-item" key={item.id}>{item.item_name}</li>
     }) : <li className="grocery-item">You have no items</li>}
   </ul>
 }
@@ -14,9 +14,15 @@ function App() {
   const [input, setInput] = useState("");
 
   useEffect(() => {
-    fetch(`http://localhost:9000/testAPI`)
+    fetch(`http://localhost:9000/groceryitems/1`)
       .then(res => {
-        console.log(res);
+        return res.json();
+      })
+      .then(data => {
+        addGroceryItem(data);
+      })
+      .catch(error => {
+        return error;
       })
   })
 

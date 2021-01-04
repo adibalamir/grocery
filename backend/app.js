@@ -5,13 +5,15 @@ const bodyParser = require('body-parser');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-const db = require('./queries')
+const db = require('./queries');
+const cors = require('cors');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var testAPIRouter = require("./routes/testAPI");
 
 var app = express();
+app.use(cors());
 
 app.use(bodyParser.json())
 app.use(
@@ -20,7 +22,10 @@ app.use(
   })
 )
 
-app.get('/users/:id', db.getUserById);
+//CRUD ENDPOINTS
+app.get('/users/:id', cors(), db.getUserById);
+app.get('/groceryitems/:id', db.getGroceryItemsByGroceryListId);
+app.post('/groceryitems');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

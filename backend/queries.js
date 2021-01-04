@@ -16,8 +16,32 @@ const getUserById = (request, response) => {
       }
       response.status(200).json(results.rows)
     })
-  }
+}
+
+const getGroceryItemsByGroceryListId = (request, response) => {
+    const id = parseInt(request.params.id)
+
+    pool.query('SELECT * FROM groceryitems WHERE grocerylist_id = $1', [id], (error, results) => {
+        if (error) {
+            throw error
+        }
+        response.status(200).json(results.rows)
+    })
+}
+
+const addGroceryItem = (request, response) => {
+    const id = parseInt(request.params.id);
+    const item_name = request.params.item_name;
+
+    pool.query('INSERT INTO groceryitems(grocerylist_id, item_name) VALUES($1, $2)', [id, item_name], (error, results) => {
+        if (error) {
+            throw error
+        }
+        response.status(200).json(results.rows)
+    })
+}
 
 module.exports = {
-    getUserById
+    getUserById,
+    getGroceryItemsByGroceryListId
 }
