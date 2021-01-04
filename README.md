@@ -18,6 +18,6 @@ yarn install
 ### 3) run the project
 Go to root directory and run
 ```
-yarn run dev
+yarn dev
 ```
 
