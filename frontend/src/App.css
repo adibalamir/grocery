@@ -1,5 +1,17 @@
+ul, li {
+  list-style: none;
+  padding: 0;
+}
+
+h1 {
+  margin: 0;
+}
+
 .App {
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  font-size: calc(12px + 2vmin);
 }
 
 body {
@@ -8,11 +20,20 @@ body {
 
 .App-header {
   display: flex;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  font-size: calc(15px + 2vmin);
   color: white;
 }
 
 .grocery-item {
   color: white;
+  padding: .8em;
+}
+
+.grocery-list {
+  flex-grow: 1;
+}
+
+.row {
+  margin: .4em;
+  border: 1px solid white;
 }
