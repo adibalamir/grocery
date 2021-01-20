@@ -31,6 +31,7 @@ body {
 
 .grocery-list {
   flex-grow: 1;
+  overflow-y: scroll;
 }
 
 .row {
