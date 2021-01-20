@@ -1,7 +1,7 @@
 # Grocery List
 This app is to keep track of groceries I need, and it will be accessible on any device.
 
-## Instructions to install and start project
+## Instructions to install and run project
 ### 1) Install project into directory 'grocery'
 ```
 git clone https://github.com/adibalamir/grocery.git grocery
@@ -22,4 +22,3 @@ Go to root directory and run
 ```
 yarn dev
 ```
-
