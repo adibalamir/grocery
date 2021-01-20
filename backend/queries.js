@@ -18,7 +18,7 @@ const getUserById = (request, response) => {
     })
 }
 
-const getGroceryItemsByGroceryListId = (request, response) => {
+const getGroceryListById = (request, response) => {
     const id = parseInt(request.params.id)
 
     pool.query('SELECT * FROM groceryitems WHERE grocerylist_id = $1', [id], (error, results) => {
@@ -30,10 +30,10 @@ const getGroceryItemsByGroceryListId = (request, response) => {
 }
 
 const addGroceryItem = (request, response) => {
-    const id = parseInt(request.params.id);
-    const item_name = request.params.item_name;
+    const grocerylist_id = request.body.grocerylist_id;
+    const item_name = request.body.item_name;
 
-    pool.query('INSERT INTO groceryitems(grocerylist_id, item_name) VALUES($1, $2)', [id, item_name], (error, results) => {
+    pool.query('INSERT INTO groceryitems(id, grocerylist_id, item_name) VALUES(default, $1, $2)', [grocerylist_id, item_name], (error, results) => {
         if (error) {
             throw error
         }
@@ -43,5 +43,6 @@ const addGroceryItem = (request, response) => {
 
 module.exports = {
     getUserById,
-    getGroceryItemsByGroceryListId
+    getGroceryListById,
+    addGroceryItem
 }
