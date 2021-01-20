@@ -15,7 +15,7 @@ cd into backend directory and run
 yarn install
 ```
 
-### 3) run the project
+### 3) Run the project
 Go to root directory and run
 ```
 yarn dev
