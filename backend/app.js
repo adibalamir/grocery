@@ -1,31 +1,35 @@
 require('dotenv').config();
 var createError = require('http-errors');
 var express = require('express');
-const bodyParser = require('body-parser');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const db = require('./queries');
-const cors = require('cors');
+
+var app = express();
+app.use(express.json());
+
+var allowCrossDomain = (req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Content-Type');
+
+  if (req.method === 'OPTIONS') {
+    return res.sendStatus(200); // to deal with browser sending an extra options request
+  }
+
+  next();
+}
+
+app.use(allowCrossDomain);
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-var testAPIRouter = require("./routes/testAPI");
-
-var app = express();
-app.use(cors());
-
-app.use(bodyParser.json())
-app.use(
-  bodyParser.urlencoded({
-    extended: true,
-  })
-)
 
 //CRUD ENDPOINTS
-app.get('/users/:id', cors(), db.getUserById);
-app.get('/groceryitems/:id', db.getGroceryItemsByGroceryListId);
-app.post('/groceryitems');
+app.get('/users/:id', db.getUserById);
+app.get('/groceryList/:id', db.getGroceryListById);
+app.post('/groceryitems', db.addGroceryItem);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -40,7 +44,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use("/testAPI", testAPIRouter);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
