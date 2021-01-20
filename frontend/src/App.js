@@ -4,35 +4,20 @@ import axios from 'axios';
 
 function GroceryList(props) {
   return <ul className="grocery-list row">
-    {props.list.length > 0 ? props.list.map(item => {
-      return <li className="grocery-item" key={item.id}>{item.item_name}</li>
+    {props.list.length > 0 ? props.list.map((item, index) => {
+      return <li className="grocery-item" key={index}>{item.item_name}</li>
     }) : <li className="grocery-item">You have no items</li>}
   </ul>
 }
 
-const addGroceryItemDB = (item) => {
-  let _data = {
-    grocerylist_id: item.grocerylist_id,
-    id: item.id,
-    item_name: item.item_name
+const addGroceryItemDB = (newItem) => {
+  let _newItem = {
+    grocerylist_id: newItem.grocerylist_id,
+    id: newItem.id,
+    item_name: newItem.item_name
   };
 
-  console.log(_data);
-
-  // axios.post('http://localhost:9000/groceryitems', _data)
-  //   .then(function(response) {
-  //     console.log(response);
-  //   })
-
-  let request = new Request('http://localhost:9000/groceryitems',{
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    method: 'POST',
-    body: JSON.stringify(_data)
-  })
-
-  fetch(request);
+  axios.post('http://localhost:9000/groceryitems', _newItem);
 }
 
 function App() {
@@ -42,7 +27,6 @@ function App() {
   useEffect(() => {
     fetch(`http://localhost:9000/groceryitems/1`)
       .then(res => {
-        console.log("Getting grocerylist...");
         return res.json();
       })
       .then(json => {
@@ -55,15 +39,13 @@ function App() {
   }, []);
 
   function onSubmit(groceryList, input) {
-    const newItem = {
+    const _newItem = {
       grocerylist_id: 1,
-      id: 3,
       item_name: input
     }
-     
-    console.log(input);
-    addGroceryItem([...groceryList, newItem]);
-    addGroceryItemDB(newItem);
+
+    addGroceryItem([...groceryList, _newItem]);
+    addGroceryItemDB(_newItem);
     setInput(""); 
   }
 
