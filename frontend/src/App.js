@@ -13,7 +13,6 @@ function GroceryList(props) {
 const addGroceryItemDB = (newItem) => {
   let _newItem = {
     grocerylist_id: newItem.grocerylist_id,
-    id: newItem.id,
     item_name: newItem.item_name
   };
 
@@ -25,12 +24,9 @@ function App() {
   const [input, setInput] = useState("");
 
   useEffect(() => {
-    fetch(`http://localhost:9000/groceryitems/1`)
+    axios.get(`http://localhost:9000/groceryList/1`)
       .then(res => {
-        return res.json();
-      })
-      .then(json => {
-        addGroceryItem(json);
+        addGroceryItem(res.data);
       })
       .catch(error => {
         console.log("ERROR");
@@ -44,6 +40,7 @@ function App() {
       item_name: input
     }
 
+    //update grocerylist client-side, update database, then clear user input
     addGroceryItem([...groceryList, _newItem]);
     addGroceryItemDB(_newItem);
     setInput(""); 
