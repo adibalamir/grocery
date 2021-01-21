@@ -1,6 +1,7 @@
 import './App.css';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import styled from 'styled-components';
 
 function GroceryList(props) {
   return <ul className="grocery-list row">
@@ -16,7 +17,7 @@ const addGroceryItemDB = (newItem) => {
     item_name: newItem.item_name
   };
 
-  axios.post('http://localhost:9000/groceryitems', _newItem);
+  axios.post('http://localhost:9000/groceryitem', _newItem);
 }
 
 function App() {
@@ -24,7 +25,7 @@ function App() {
   const [input, setInput] = useState("");
 
   useEffect(() => {
-    axios.get(`http://localhost:9000/groceryList/1`)
+    axios.get(`http://localhost:9000/grocerylist/1`)
       .then(res => {
         addGroceryItem(res.data);
       })
