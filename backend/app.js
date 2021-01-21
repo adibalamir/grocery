@@ -32,7 +32,7 @@ var postGroceryItem = require('./routes/groceryitem');
 
 app.use('/', getIndex);
 app.use('/grocerylist', getGroceryList);
-app.use('./groceryitem', postGroceryItem);
+app.use('/groceryitem', postGroceryItem);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
